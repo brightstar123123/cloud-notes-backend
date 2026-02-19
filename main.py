@@ -18,6 +18,10 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import declarative_base, sessionmaker, relationship
 
+from fastapi.middleware.cors import CORSMiddleware
+
+
+
 # =========================================================
 # SECURITY CONFIG
 # =========================================================
@@ -44,6 +48,15 @@ Base = declarative_base()
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",  # React dev server
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # =========================================================
 # DATABASE MODELS
 # =========================================================
